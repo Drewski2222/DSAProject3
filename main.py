@@ -23,5 +23,10 @@ def main():
     for item in report[:10]:
         print(item)
 
+    sorted_report = quick_sort(report, sort_key)
+
+    for item in sorted_report[:10]:
+        print(item)
+
 if __name__ == "__main__":
     main()
