@@ -47,9 +47,6 @@ int main() {
     cout << "Key to sort data by? (1 = cases, 2 = deaths, 3 = rate)" << endl;
     cin >> choice;
 
-    // start timer
-    auto time1 = chrono::high_resolution_clock::now();
-
     if (choice == 1) {
         auto time1 = chrono::high_resolution_clock::now();
         sort(full_data.begin(), full_data.end(), [](data& a, data& b) {
