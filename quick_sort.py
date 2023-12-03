@@ -1,24 +1,32 @@
 def quick_sort(data, key):
     if len(data) <= 1:
         return data
-    
-    pivot = data[len(data) // 2][key]
-    
-    left = []
-    middle = []
-    right = []
 
-    for x in data:
-        # if x[key] is less than pivot, append to left list
-        if x[key] < pivot:
-            left.append(x)
-        # if x[key] is equal to pivot, append to middle list
-        elif x[key] == pivot:
-            middle.append(x)
-        # if x[key] is greater than pivot, append to right list
-        else:
-            right.append(x)
+    stack = [(0, len(data) - 1)]
 
-    # recursively sort left and right lists and concatenate results
-    return quick_sort(left, key) + middle + quick_sort(right, key)
+    while stack:
+        low, high = stack.pop()
 
+        if low < high:
+            pivot_index = partition(data, low, high, key)
+            stack.append((low, pivot_index - 1))
+            stack.append((pivot_index + 1, high))
+
+    return data
+
+def partition(data, low, high, key):
+    pivot = data[low]['Data'][key]
+    up = low + 1
+    down = high
+
+    while up <= down:
+        while up <= down and data[up]['Data'][key] <= pivot:
+            up += 1
+        while data[down]['Data'][key] > pivot:
+            down -= 1
+        if up < down:
+            data[up], data[down] = data[down], data[up]
+
+    data[low], data[down] = data[down], data[low]
+
+    return down
